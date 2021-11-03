@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Predict Deaths by Respiratory Diseases</title>
+    <link href='https://fonts.googleapis.com/css?family=Pacifico' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Arimo' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Hind:300' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300' rel='stylesheet' type='text/css'>
+    <link type="text/css" rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+</head>
+
+<body>
+
+    <div class="container">
+        <h3>Modelo de Predicción de muertes por enfermedades respiratorias</h3>
+        <!-- Form to enter new data for predictions  -->
+        <form action="{{ url_for('predict')}}" method="POST">
+            <div class="radio_form">
+                <p class="instructions">
+                    Seleccione el modelo a usar
+                </p>
+                <input type="radio" onclick="selectModel(7);" id="m7_radio" name="models" value="M7" checked="checked">
+                <label for="m7_radio">Modelo 7</label>
+                <input type="radio" onclick="selectModel(8);" id="m8_radio" name="models" value="M8">
+                <label for="m8_radio">Modelo 8</label>
+            </div>
+
+            <p>Los gases deben estar en MtCO2e (millones de toneladas de bióxido de carbono equivalente)</p>
+            <input id="co2" type="text" name="CO2" placeholder="CO2" />
+            <input id="ch4" type="text" name="CH4" placeholder="CH4" />
+            <input id="n2o" type="text" name="N2O" placeholder="N2O" />
+            <input id="fgas" type="text" name="FGas" placeholder="FGas" />
+            <input id="temp" type="text" name="Temp" placeholder="Temp ºC" />
+            <button type="submit" class="btn">Predict</button>
+        </form>
+        <br>
+        <br>
+    </div>
+    <div class="predictions">
+        {{pred}}
+    </div>
+    <script type="text/javascript" src="{{ url_for('static', filename='js/script.js') }}"></script>
+</body>
+
+</html>
