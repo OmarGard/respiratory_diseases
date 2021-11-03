@@ -3,6 +3,8 @@ import pandas as pd
 import pickle
 import warnings
 import numpy as np
+import numbers
+
 warnings.filterwarnings('ignore')
 app = Flask(__name__, template_folder='templates')
 
@@ -26,21 +28,44 @@ def predict():
     data_unseen = []
     prediction = []
     if model_selected == "M7":
+
         fgas = request.form.get('FGas')
         n2o = request.form.get('N2O')
         ch4 = request.form.get('CH4')
         co2 = request.form.get('CO2')
         temp = request.form.get('Temp')
+
         if fgas == "":
             return render_template('index.html', pred=f"FGas no puede estar vacío")
+        try:
+            tmp = float(fgas)
+        except:
+            return render_template('index.html', pred=f"FGas debe ser un número")
+
         if n2o == "":
             return render_template('index.html', pred=f"N2O no puede estar vacío")
+        try:
+            tmp = float(n2o)
+        except:
+            return render_template('index.html', pred=f"N2O debe ser un número")
         if ch4 == "":
             return render_template('index.html', pred=f"CH4 no puede estar vacío")
+        try:
+            tmp = float(ch4)
+        except:
+            return render_template('index.html', pred=f"CH4 debe ser un número")
         if co2 == "":
             return render_template('index.html', pred=f"CO2 no puede estar vacío")
+        try:
+            tmp = float(co2)
+        except:
+            return render_template('index.html', pred=f"CO2 debe ser un número")
         if temp == "":
             return render_template('index.html', pred=f"Temperatura no puede estar vacío")
+        try:
+            tmp = float(temp)
+        except:
+            return render_template('index.html', pred=f"Temperatura debe ser un número")
 
         x = np.array([fgas, n2o, ch4, co2, temp])
         data_unseen = pd.DataFrame([x], columns=cols_m7)
