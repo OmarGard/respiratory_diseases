@@ -82,7 +82,7 @@ def predict():
         data_unseen = pd.DataFrame([x], columns=cols_m8)
         prediction = model_8.predict(data_unseen)
 
-    return render_template('index.html', pred=f"El número de muertes esperadas es {prediction[0]}")
+    return render_template('predictionResult.html', pred=f"El número de muertes esperadas es {prediction[0]}")
     # return render_template('index.html', pred=model_selected)
 
 
